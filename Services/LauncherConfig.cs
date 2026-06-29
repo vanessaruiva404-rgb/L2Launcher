@@ -21,7 +21,7 @@ namespace LineageII.Services
 
         public static LauncherConfig Load()
         {
-            string url = ConfigurationManager.AppSettings["LauncherUrl"] ?? "https://l2elysian.com.br/index.php";
+            string url = ConfigurationManager.AppSettings["LauncherUrl"] ?? "https://localhost/index.php";
             int defaultWidth = ParseOrDefault("DefaultWidth", 1280);
             int defaultHeight = ParseOrDefault("DefaultHeight", 720);
             int minWidth = ParseOrDefault("MinimumWidth", 1024);
