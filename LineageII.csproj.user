@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <OutputType>WinExe</OutputType>
+    <!-- Build PRO -->
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+    <!-- Otimização -->
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+    <!-- Ícone -->
+    <ApplicationIcon>icone.ico</ApplicationIcon>
+    <Win32Icon>icone.ico</Win32Icon>
+    <!-- Remove lixo -->
+    <GenerateSerializationAssemblies>on</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EnableSecurityDebugging>false</EnableSecurityDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3856.49" />
+  <PackageReference Include="Fody" Version="6.9.3" PrivateAssets="all" />
+  <PackageReference Include="Costura.Fody" Version="6.0.0" PrivateAssets="all" />
+</ItemGroup>
+</Project>
