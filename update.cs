@@ -1394,34 +1394,69 @@ namespace LineageII
             if (filesToRepair == null || filesToRepair.Count == 0)
                 return;
 
+            // 1. Arquivos avulsos (sem pacote ZIP associado)
+            List<FileEntry> rawFiles = filesToRepair
+                .Where(file => string.IsNullOrWhiteSpace(file.Package))
+                .ToList();
+
+            if (rawFiles.Count > 0)
+            {
+                int rawTotal = rawFiles.Count;
+                int rawIndex = 0;
+                foreach (FileEntry file in rawFiles)
+                {
+                    rawIndex++;
+                    SetCheckProgress(
+                        Math.Min(80, (int)((rawIndex * 80.0) / rawTotal)),
+                        $"Baixando: {file.Path}"
+                    );
+
+                    await DownloadRawFile(manifest, file);
+                }
+            }
+
+            // 2. Arquivos empacotados em ZIP
             List<FileEntry> packagesToRepair = filesToRepair
                 .Where(file => !string.IsNullOrWhiteSpace(file.Package))
                 .GroupBy(file => file.Package, StringComparer.OrdinalIgnoreCase)
                 .Select(group => group.First())
                 .ToList();
 
-            if (packagesToRepair.Count == 0)
-                throw new Exception("Manifest sem pacote ZIP para repair.");
-
-            int total = packagesToRepair.Count;
-            int index = 0;
-
-            foreach (FileEntry file in packagesToRepair)
+            if (packagesToRepair.Count > 0)
             {
-                index++;
+                int total = packagesToRepair.Count;
+                int index = 0;
 
-                SetCheckProgress(
-                    Math.Min(94, 80 + (int)(((index - 1) * 14.0) / total)),
-                    $"Repair: {file.Package}"
-                );
+                foreach (FileEntry file in packagesToRepair)
+                {
+                    index++;
 
-                await DownloadAndExtractSingleFilePackage(manifest, file);
+                    SetCheckProgress(
+                        Math.Min(94, 80 + (int)(((index - 1) * 14.0) / total)),
+                        $"Repair: {file.Package}"
+                    );
 
-                SetCheckProgress(
-                    Math.Min(94, 80 + (int)((index * 14.0) / total)),
-                    $"Repair aplicado: {file.Package}"
-                );
+                    await DownloadAndExtractSingleFilePackage(manifest, file);
+
+                    SetCheckProgress(
+                        Math.Min(94, 80 + (int)((index * 14.0) / total)),
+                        $"Repair aplicado: {file.Package}"
+                    );
+                }
             }
+        }
+
+        private async Task DownloadRawFile(Manifest manifest, FileEntry file)
+        {
+            string baseUrl = GetBuildBaseUrl(manifest);
+            string url = BuildPackageUrl(baseUrl, file.Path);
+            string targetPath = Path.GetFullPath(Path.Combine(Application.StartupPath, NormalizeRelativePath(file.Path)));
+
+            string dir = Path.GetDirectoryName(targetPath);
+            if (!string.IsNullOrEmpty(dir))
+                Directory.CreateDirectory(dir);
+
+            await DownloadFile(url, targetPath, file.Size);
         }
 
         private string GetBuildBaseUrl(Manifest manifest)
