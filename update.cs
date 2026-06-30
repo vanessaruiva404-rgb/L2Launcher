@@ -871,7 +871,7 @@ namespace LineageII
                     return;
                 }
 
-                // Verifica rapidamente se todos os arquivos do manifesto existem fisicamente
+                // Verifica rapidamente se todos os arquivos do manifesto existem fisicamente e possuem o tamanho correto
                 if (manifest.Files != null)
                 {
                     foreach (FileEntry file in manifest.Files)
@@ -881,10 +881,21 @@ namespace LineageII
 
                         try
                         {
-                            if (!File.Exists(GetLocalGamePath(file.Path)))
+                            string localPath = GetLocalGamePath(file.Path);
+                            if (!File.Exists(localPath))
                             {
                                 clientVerified = false;
                                 return;
+                            }
+
+                            if (file.Size > 0)
+                            {
+                                FileInfo info = new FileInfo(localPath);
+                                if (info.Length != file.Size)
+                                {
+                                    clientVerified = false;
+                                    return;
+                                }
                             }
                         }
                         catch
