@@ -871,6 +871,30 @@ namespace LineageII
                     return;
                 }
 
+                // Verifica rapidamente se todos os arquivos do manifesto existem fisicamente
+                if (manifest.Files != null)
+                {
+                    foreach (FileEntry file in manifest.Files)
+                    {
+                        if (string.IsNullOrWhiteSpace(file.Path))
+                            continue;
+
+                        try
+                        {
+                            if (!File.Exists(GetLocalGamePath(file.Path)))
+                            {
+                                clientVerified = false;
+                                return;
+                            }
+                        }
+                        catch
+                        {
+                            clientVerified = false;
+                            return;
+                        }
+                    }
+                }
+
                 if (!deepCheck)
                 {
                     clientVerified = true;
