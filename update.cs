@@ -1106,6 +1106,7 @@ namespace LineageII
             {
                 FileName = exe,
                 WorkingDirectory = Path.GetDirectoryName(exe),
+                Arguments = "-from-launcher",
                 UseShellExecute = true
             });
 
