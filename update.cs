@@ -647,7 +647,7 @@ namespace LineageII
         panel.className = 'elysian-launcher-panel';
         panel.innerHTML = `
             <div class='elysian-launcher-head'>
-                <h4 class='elysian-launcher-title'>Launcher Elysian</h4>
+                <h4 class='elysian-launcher-title'>Launcher L2 RP</h4>
                 <span class='elysian-launcher-badge'>Oficial</span>
             </div>
             <p id='elysianLauncherStatus'>Carregando status...</p>
