@@ -1,4 +1,4 @@
-﻿using System.Configuration;
+using System.Configuration;
 
 namespace LineageII.Services
 {
@@ -21,7 +21,7 @@ namespace LineageII.Services
 
         public static LauncherConfig Load()
         {
-            string url = ConfigurationManager.AppSettings["LauncherUrl"] ?? "https://localhost/index.php";
+            string url = ConfigurationManager.AppSettings["LauncherUrl"] ?? "https://www.l2rp.com/";
             int defaultWidth = ParseOrDefault("DefaultWidth", 1280);
             int defaultHeight = ParseOrDefault("DefaultHeight", 720);
             int minWidth = ParseOrDefault("MinimumWidth", 1024);
