@@ -1471,7 +1471,7 @@ namespace LineageII
 
             // Segurança contra manifest antigo com caminho errado (/UpdaterWeb sem o L2).
             baseUrl = baseUrl.Replace("http://localhost/UpdaterWeb", defaultUrl);
-            baseUrl = baseUrl.Replace("http://l2elysian.com.br/UpdaterWeb", defaultUrl);
+            baseUrl = baseUrl.Replace("http://l2rp.com/UpdaterWeb", defaultUrl);
 
             return baseUrl;
         }
