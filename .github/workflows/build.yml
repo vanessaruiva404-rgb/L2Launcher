@@ -1,0 +1,34 @@
+name: Build Launcher
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch: # Permite iniciar a compilação manualmente pelo painel do GitHub
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v4
+
+    - name: Configurar MSBuild
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Configurar NuGet
+      uses: NuGet/setup-nuget@v2
+
+    - name: Restaurar Pacotes NuGet
+      run: nuget restore LineageII.csproj
+
+    - name: Compilar Launcher (Release)
+      run: msbuild LineageII.csproj /p:Configuration=Release /p:Platform=AnyCPU
+
+    - name: Enviar Executável Compilado (Upload Artifact)
+      uses: actions/upload-artifact@v4
+      with:
+        name: LineageII-Launcher-Release
+        path: bin/Release/LineageII.exe
