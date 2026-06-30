@@ -1,13 +1,13 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Lineage II Elysian Launcher")]
-[assembly: AssemblyDescription("Official launcher and auto-updater for Lineage II Elysian")]
+[assembly: AssemblyTitle("Lineage II RP Launcher")]
+[assembly: AssemblyDescription("Official launcher and auto-updater for Lineage II RP")]
 [assembly: AssemblyConfiguration("Release")]
-[assembly: AssemblyCompany("L2 Elysian")]
-[assembly: AssemblyProduct("Lineage II Elysian Launcher")]
-[assembly: AssemblyCopyright("(c) 2026 L2 Elysian. All rights reserved.")]
+[assembly: AssemblyCompany("L2 RP")]
+[assembly: AssemblyProduct("Lineage II RP Launcher")]
+[assembly: AssemblyCopyright("(c) 2026 L2 RP. All rights reserved.")]
 [assembly: AssemblyTrademark("Lineage II is a trademark of NCSOFT Corporation.")]
 [assembly: AssemblyCulture("")]
 
