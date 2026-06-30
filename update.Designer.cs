@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Resources;
 
 namespace LineageII
@@ -97,7 +97,7 @@ namespace LineageII
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(375, 32);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "LINEAGE II NEXORA INTERLUDE";
+            this.lblTitle.Text = "LINEAGE II RP INTERLUDE";
             // 
             // lblSubtitle
             // 
