@@ -978,7 +978,7 @@ namespace LineageII
 
         private async Task<Manifest> FetchManifest()
         {
-            string manifestUrl = "http://157.254.248.55:8080/L2UpdaterWeb/api/manifest.php?t=" + DateTime.UtcNow.Ticks;
+            string manifestUrl = "http://157.254.248.55:8090/L2UpdaterWeb/api/manifest.php?t=" + DateTime.UtcNow.Ticks;
             string json = await client.GetStringAsync(manifestUrl);
             Manifest manifest = JsonConvert.DeserializeObject<Manifest>(json);
 
