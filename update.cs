@@ -1346,7 +1346,12 @@ namespace LineageII
                     await Task.Run(() => GetFilesNeedingRepair(manifest.Files, 95, 99));
 
                 if (finalRepair.Count > 0)
-                    throw new Exception($"{finalRepair.Count} arquivo(s) ainda com problema.");
+                {
+                    string fileNames = string.Join(", ", finalRepair.Select(f => Path.GetFileName(f.Path)).Take(3));
+                    if (finalRepair.Count > 3)
+                        fileNames += " ...";
+                    throw new Exception($"{finalRepair.Count} arquivo(s) ainda com problema ({fileNames}). Verifique se o jogo está aberto ou o Antivírus bloqueou.");
+                }
 
                 SaveLocalVersion(manifest.Latest_version);
                 clientVerified = true;
