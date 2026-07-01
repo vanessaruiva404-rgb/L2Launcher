@@ -1497,6 +1497,17 @@ namespace LineageII
             if (!string.IsNullOrEmpty(dir))
                 Directory.CreateDirectory(dir);
 
+            if (File.Exists(targetPath))
+            {
+                try
+                {
+                    File.Delete(targetPath);
+                }
+                catch
+                {
+                }
+            }
+
             await DownloadFile(url, targetPath, file.Size);
         }
 
